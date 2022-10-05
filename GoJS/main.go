@@ -3,17 +3,22 @@ package main
 import (
   _ "embed"
   "github.com/wailsapp/wails"
+  "github.com/leaanthony/mewn"
 )
 
 func basic() string {
   return "World!"
 }
 
-//go:embed frontend/build/static/js/main.js
-var js string
+func action(id string) string{
+  return id + "Hello!"
+}
 
-//go:embed frontend/build/static/css/main.css
-var css string
+//goembed frontend/build/static/js/main.js
+var js string=mewn.String("./frontend/src/index.js")
+
+//goembed frontend/build/static/css/main.css
+var css string=mewn.String("./frontend/src/index.css")
 
 func main() {
 
@@ -26,5 +31,6 @@ func main() {
     Colour: "#131313",
   })
   app.Bind(basic)
+  app.Bind(action)
   app.Run()
 }
